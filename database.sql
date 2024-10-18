@@ -1,0 +1,3 @@
+create database belajar_laravel_security;
+
+use belajar_laravel_security;
