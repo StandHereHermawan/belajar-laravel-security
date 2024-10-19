@@ -1,0 +1,2 @@
+# Perintah Untuk Seeding Manual.
+php artisan db:seed --class=UserSeeder
