@@ -54,4 +54,19 @@ class UserTest extends TestCase
 
         Log::info(json_encode($user, JSON_PRETTY_PRINT));
     }
+
+    public function testRedirectFromCurrent(): void
+    {
+        self::seed([UserSeeder::class,]);
+
+        $this->get('/users/current')
+            ->assertStatus(302)
+            ->assertRedirect("login");
+
+        $user = \App\Models\User::where("email","terry@localhost")->first();
+        $this->actingAs($user)
+            ->get('/users/current')
+            ->assertSeeText("Hello Terry In Paris!");
+        
+    }
 }

@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get("/users/login", [\App\Http\Controllers\Model\UserController::class, "login"]);
-Route::get("/users/current", [\App\Http\Controllers\Model\UserController::class, "current"]);
+Route::get("/users/current", [\App\Http\Controllers\Model\UserController::class, "current"])
+    ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
