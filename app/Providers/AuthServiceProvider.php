@@ -5,7 +5,8 @@ namespace App\Providers;
 
 use App\Providers\Guard\TokenGuard;
 
-use Illuminate\Foundation\Application;
+use App\Providers\Model\User\SimpleUserProvider;
+    use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 use Illuminate\Http\Request;
@@ -33,6 +34,10 @@ class AuthServiceProvider extends ServiceProvider
             $guard = new TokenGuard(Auth::createUserProvider($config["provider"]), $application->make(Request::class));
             $application->refresh('request', $guard, 'setRequest');
             return $guard;
+        });
+
+        Auth::provider("simple",function (Application $application, array $config) {
+            return new SimpleUserProvider();
         });
     }
 }
