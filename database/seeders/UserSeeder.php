@@ -20,5 +20,12 @@ class UserSeeder extends Seeder
             "password" => Hash::make("rahasia@12"),
             "token" => UuidV7::uuid7(),
         ]);
+
+        \App\Models\User::create([
+            "name" => "Andrew In Paris",
+            "email" => "andrew@localhost",
+            "password" => Hash::make("rahasia@12"),
+            "token" => UuidV7::uuid7(),
+        ]);
     }
 }
