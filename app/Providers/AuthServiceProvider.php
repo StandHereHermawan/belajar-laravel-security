@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Providers\Guard\TokenGuard;
 
 use App\Providers\Model\User\SimpleUserProvider;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -49,6 +50,13 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define("delete-contact", function (User $user, Contact $contact) {
             return $user->id === $contact->user_id;
+        });
+        Gate::define("create-contact", function ( User $value,) {
+            if ($value->name == "admin") {
+                return Response::allow();
+            } else {
+                return Response::deny("You are not admin.");
+            }
         });
     }
 }
