@@ -12,6 +12,8 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
+        DB::statement("DELETE FROM todos;");
+        DB::statement("ALTER TABLE todos AUTO_INCREMENT = 1;");
         DB::statement("DELETE FROM contacts;");
         DB::statement("ALTER TABLE contacts AUTO_INCREMENT = 1;");
         DB::statement("DELETE FROM users;");

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Contact;
+use App\Models\Todo;
 use App\Models\User;
+use App\Policies\TodoPolicy;
 use App\Providers\Guard\TokenGuard;
 
 use App\Providers\Model\User\SimpleUserProvider;
@@ -24,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        Todo::class => TodoPolicy::class
     ];
 
     /**
