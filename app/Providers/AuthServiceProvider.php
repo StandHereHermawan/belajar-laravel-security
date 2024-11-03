@@ -6,15 +6,13 @@ use App\Models\Contact;
 use App\Models\Todo;
 use App\Models\User;
 use App\Policies\TodoPolicy;
+use App\Policies\UserPolicy;
 use App\Providers\Guard\TokenGuard;
-
 use App\Providers\Model\User\SimpleUserProvider;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        User::class => UserPolicy::class,
         Todo::class => TodoPolicy::class
     ];
 
