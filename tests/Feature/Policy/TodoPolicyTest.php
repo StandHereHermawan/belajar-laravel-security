@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 use Tests\TestCase;
@@ -35,5 +36,21 @@ class TodoPolicyTest extends TestCase
         self::assertTrue(Gate::allows("update", $todo));
         self::assertTrue(Gate::allows("delete", $todo));
         self::assertTrue(Gate::allows("create", Todo::class));
+    }
+
+    public function testAdmin(): void
+    {
+        self::seed([UserSeeder::class, TodoSeeder::class,]);
+        $todo = Todo::first();
+
+        $user = new User([
+            "name" => "superadmin",
+            "email" => "superadmin@localhost",
+            "password" => Hash::make("rahasia@12"),
+        ]);
+
+        self::assertTrue($user->can("view", $todo));
+        self::assertTrue($user->can("update", $todo));
+        self::assertTrue($user->can("delete", $todo));
     }
 }
